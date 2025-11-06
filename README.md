@@ -1,4 +1,4 @@
-# Wayback Machine CDX Search Engine – Flask Edition
+# SuperCDX (a Wayback Machine CDX Search Engine Interface) – Flask Edition
 
 A Flask-based web application for searching files on the Internet Archive's Wayback Machine using the CDX API.  
 
