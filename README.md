@@ -1,4 +1,4 @@
-# Wayback CDX Search Engine – Flask Edition
+# Wayback Machine CDX Search Engine – Flask Edition
 
 A Flask-based web application for searching files on the Internet Archive's Wayback Machine using the CDX API.  
 
@@ -103,4 +103,4 @@ All search queries (URLs) are logged to `logs/queries.txt` as single-line entrie
 
 ## License
 
-This is a Flask port of the original PHP Wayback CDX search engine.
+This is a Flask port of the original PHP Wayback CDX search engine. I have no endorsement from nor affiliation with Archive.org, Wayback Machine or Wayback Machine CDX, etc.
