@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Help - Wayback Machine CDX search engine</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search the Wayback Machine directly">
+  <meta name="keywords" content="wayback machine, search, search engine, wayback, archive, archive.org, internet archive" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+<style>
+
+body {
+  background-color: #000;
+}
+
+.memphis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #27014f;
+  background-image: url("{{ url_for('static', filename='images/memphis.png') }}");
+  background-repeat: repeat;
+  padding: 20px;
+}
+
+.content {
+  max-width: 800px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.content h1 {
+  color: #27014f;
+  border-bottom: 3px solid #27014f;
+  padding-bottom: 10px;
+}
+
+.content h2 {
+  color: #27014f;
+  margin-top: 30px;
+}
+
+.content code {
+  background-color: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.content pre {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.content a {
+  color: #27014f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+.nav-buttons {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.nav-buttons a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #27014f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-buttons a:hover {
+  background-color: #1c0252;
+}
+
+</style>
+</head>
+<body>
+
+<div class="memphis">
+  <div class="content">
+    <h1>super cdx help</h1>
+
+    <p><strong>super cdx</strong> is a search engine to help find files on the <a href="https://archive.org/web/" target="_blank">Wayback Machine</a>.</p>
+    <p>Some of this help file is obsolete as it was directly ported from the web version, but the rest is still valid.</p>
+
+    <h2>Quickstart</h2>
+    <p><a href="{{ url_for('static', filename='images/quickstart.png') }}" target="_blank">A screenshot</a> of what a search might look like, and its results</p>
+
+    <h2>More detailed explanation:</h2>
+
+    <p>To search, put the URL of the website you want to search the contents of. Some examples of valid URL patterns:</p>
+
+    <pre>http://www.example.org/
+https://members.example.org/~mike/
+https://community.example.org/this/that/other-thing/
+127.0.0.1
+
+or just simply:
+
+example.org</pre>
+
+    <h3>Some valid search string examples / cheat sheet:</h3>
+
+    <p><strong>Single filetype:</strong></p>
+    <pre>.mp4</pre>
+
+    <p><strong>Multiple filetypes:</strong></p>
+    <pre>.exe .jpg .doc .pdf .js .zip .mid .wav</pre>
+
+    <p><strong>A specific file name:</strong></p>
+    <pre>super_cool.html</pre>
+
+    <p><strong>A path:</strong></p>
+    <pre>/games/coolgame/file.zip</pre>
+
+    <p><strong>String in URL:</strong></p>
+    <pre>/cgi-bin/</pre>
+
+    <p><strong>Random word:</strong></p>
+    <pre>virtual</pre>
+
+    <p><strong>Multiple words (literal):</strong></p>
+    <pre>'virtual reality'</pre>
+    <p>(returns results matching only 'virtual reality')</p>
+
+    <p><strong>Multiple words (not literal):</strong></p>
+    <pre>virtual reality</pre>
+    <p>(returns results matching 'virtual' <em>and/or</em> 'reality')</p>
+
+    <p><strong>Mixed uses:</strong></p>
+    <pre>/games/ .exe 'virtual reality' coolpic.bmp</pre>
+
+    <p>As you can see, it's rather versatile, so use your imagination.</p>
+
+    <h2>TIP:</h2>
+    <p>You can click the result number to load the result without the Wayback toolbar at the top. Note that this doesn't always work as one may expect. For example, if there are any redirects, it will try to redirect to the actual URL rather than having Wayback Machine catch the redirect and direct you to an archived page. There are other quirks with this, but it's good for direct links to binaries if you want to right-click to save.</p>
+
+    <h2>Notes/Warnings/Info:</h2>
+
+    <ul>
+      <li>This engine currently ignores letter case. That is, it doesn't care if searches use capital letters or not.</li>
+      <li>If you do not specify a string or filetype search it's possible the search could return hundreds of thousands of results and crash your browser. Fair warning!</li>
+      <li>The Wayback CDX server is slow or unresponsive a lot. This site is also slow. Please don't hammer the sites by clicking stuff when it doesn't work instantly. Don't refresh the page while it's searching. The search cannot hang. If it times out it will tell you so. I have tried to think of every possible scenario, just have some patience!</li>
+      <li>This only returns items with HTTP status 200. Meaning, when Wayback crawled the site, if the file wasn't available it will grab the error page which isn't HTTP 200, and we don't want that. This will only show you files which actually exist. But note, sometimes error pages are served incorrectly and return HTTP status 200 so this isn't foolproof.</li>
+      <li>I reserve the right to add a login or make this disappear from the Internet at any time so please don't abuse it.</li>
+    </ul>
+
+    <p><a href="https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server" target="_blank">Learn more about the Wayback Machine CDX server</a></p>
+
+    <p><em>This is neither created nor endorsed by <a href="https://archive.org" target="_blank">The Internet Archive</a></em></p>
+
+    <p><strong>This site doesn't make anything more convenient for your bot, just humans.</strong></p>
+
+    <p>That said, please don't scrape this site - it's stupid when you can scrape the actual CDX instead or <a href="https://github.com/av1d/cdx-toolkit" target="_blank">use the toolset I wrote specifically for this purpose</a></p>
+
+    <p>You can also use our <strong>CDX Link Generator</strong> to learn how to construct a URL for your query, which you could then use in cURL or your own software easily.</p>
+
+    <p>Lastly, if you're stuck on something, use the contact form below to ask a development question. I'm not your personal tech support but I may be able to help.</p>
+
+    <div class="nav-buttons">
+      <a href="{{ url_for('index') }}">back to search</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

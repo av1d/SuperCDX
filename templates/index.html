@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Super CDX - Wayback Machine Search{% endblock %}
+
+{% block content %}
+<!-- Search Form -->
+<div class="search-container">
+    <form method="GET" action="{{ url_for('search') }}" id="searchForm">
+        <table width="100%" border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>
+                    <label for="url">URL to search:</label><br>
+                    <input type="text" name="url" id="url" size="50" placeholder="example.com" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="query">Search terms (optional):</label><br>
+                    <input type="text" name="query" id="query" size="50" placeholder=".mp4 .pdf 'search phrase'">
+                </td>
+            </tr>
+            <tr>
+<td>
+    <button type="submit"
+        id="searchBtn"
+        style="background:#4B157C;color:#fff;padding:8px 16px;border:none;border-radius:4px;">
+        Search
+    </button>
+    <button type="button"
+        onclick="window.open('{{ url_for('help_page') }}', '_blank');"
+        style="background:#4B157C;color:#fff;padding:8px 16px;margin-left:8px;border:none;border-radius:4px;">
+        Help
+    </button>
+    <button id="workingBtn"
+        style="display:none;background:#4B157C;color:#fff;padding:8px 16px;margin-left:8px;border:none;border-radius:4px;">
+        WORKING... DO NOT REFRESH THE PAGE
+    </button>
+</td>
+<script>
+document.getElementById('searchBtn').addEventListener('click', function() {
+    document.getElementById('workingBtn').style.display = 'inline-block';
+});
+</script>
+
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

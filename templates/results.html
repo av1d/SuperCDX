@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Super CDX{% endblock %}
+
+{% block extra_head %}
+<style>
+.result-row {
+    padding: 8px;
+    margin: 2px 0;
+}
+.result-row.even {
+    background-color: #f0f0f0;
+}
+.result-row.odd {
+    background-color: #ffffff;
+}
+.result-num {
+    display: inline-block;
+    width: 60px;
+    font-weight: bold;
+}
+.stats-header {
+    background-color: #27014f;
+    color: white;
+    padding: 15px;
+    margin: 20px 0;
+}
+.stats-footer {
+    background-color: #f4f4f4;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+.export-section {
+    text-align: center;
+    padding: 10px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Search Form -->
+<div class="search-container">
+    <form method="GET" action="{{ url_for('search') }}" id="searchForm">
+        <table width="100%" border="0" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>
+                    <label for="url">URL to search:</label><br>
+                    <input type="text" name="url" id="url" size="50" placeholder="example.com" value="{{ domain }}" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="query">Search terms (optional):</label><br>
+                    <input type="text" name="query" id="query" size="50" placeholder=".mp4 .pdf 'search phrase'" value="{{ query_display or '' }}">
+                </td>
+            </tr>
+            <tr>
+			<td>
+				<button type="submit"
+					style="background:#4B157C;color:#fff;padding:8px 16px;border:none;border-radius:4px;">
+					Search
+				</button>
+				<button type="button"
+					onclick="window.open('{{ url_for('help_page') }}', '_blank');"
+					style="background:#4B157C;color:#fff;padding:8px 16px;margin-left:8px;border:none;border-radius:4px;">
+					Help
+				</button>
+			</td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- Results Stats Header -->
+<div class="stats-header">
+    <strong>Showing {{ total_results }}</strong> results for 
+    {% if query_display %}<strong>{{ query_display }}</strong> on {% endif %}
+    <strong>{{ domain }}</strong>
+
+    <div class="export-section">
+        <button id="exportButton" 
+                onmouseover="displayQuote(event, 'Export as plain text file')" 
+                onmouseout="eraseQuote()">
+            💾 Export Results
+        </button>
+
+    </div>
+
+    <p style="font-size: 0.9em; margin-top: 10px;">
+        Links open in new window. View <a href="{{ url_for('help_page') }}" target="_blank" style="color: #fff; text-decoration: underline;">help</a> for search tips.
+    </p>
+</div>
+
+<!-- Results Container -->
+<div class="results-container">
+    {% for result in results %}
+    <div class="result-row {{ result.css_class }}">
+        <a href="{{ result.no_toolbar_url }}" target="_blank" class="result-num">{{ result.num }}</a>
+        <span> - </span>
+        <a href="{{ result.url }}" target="_blank">{{ result.url }}</a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Hidden textarea for export functionality -->
+<textarea id="search-strings" style="display:none;">
+{% for link in result_links_array %}{{ link }}
+{% endfor %}
+</textarea>
+
+<!-- Results Stats Footer -->
+<div class="stats-footer">
+    <p>
+        <strong>{{ total_results }}</strong> results returned in <strong>{{ execution_time }}</strong> seconds by {{ request.host }}
+    </p>
+    <p style="font-size: 0.9em; color: #666;">
+        {{ timestamp }}
+    </p>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Export results to text file
+const exportButton = document.getElementById("exportButton");
+const textareaContent = document.getElementById("search-strings").value;
+exportButton.addEventListener("click", function () {
+    const blob = new Blob([textareaContent], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "exported_results.txt";
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+});
+
+// Copy URL to clipboard (share button)
+function showNotification(message) {
+    var notification = document.getElementById('notification');
+    if (notification) {
+        notification.textContent = message;
+        notification.style.position = 'fixed';
+        notification.style.top = '20px';
+        notification.style.right = '20px';
+        notification.style.backgroundColor = '#27014f';
+        notification.style.color = '#fff';
+        notification.style.padding = '15px 20px';
+        notification.style.borderRadius = '5px';
+        notification.style.zIndex = '10000';
+        notification.style.opacity = 1;
+
+        // Fade out the notification after 3 seconds
+        setTimeout(function() {
+            notification.style.opacity = 0;
+        }, 3000);
+    }
+}
+
+function copyUrlToClipboard() {
+    var url = window.location.href;
+    var tempInput = document.createElement('input');
+    tempInput.setAttribute('value', url);
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showNotification('Page URL copied to clipboard!');
+}
+</script>
+{% endblock %}

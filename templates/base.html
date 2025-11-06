@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Super CDX - Wayback Machine Search{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div id="no-BS-tooltips"></div>
+    <div id="notification" style="opacity: 0;"></div>
+
+    {% block content %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/no-bs-tooltips.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
