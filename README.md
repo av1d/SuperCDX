@@ -2,7 +2,7 @@
 
 A Flask-based web application for searching files on the Internet Archive's Wayback Machine using the CDX API.  
 
-This is a Flask port of the original PHP Wayback CDX search engine, which ran in production at [superscape.org](https://superscape.org) for 3 years until it became abused. This is why we can't have nice things. Now you can run it locally instead.
+This is a Flask port of my original PHP Wayback CDX search engine called SuperCDX, which ran in production at [superscape.org](https://superscape.org) for 3 years until it became abused. This is why we can't have nice things. Now you can run it locally instead.
 
 Feel free to open issues to help each other, but this app is unsupported by me.
 
