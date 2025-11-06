@@ -103,4 +103,4 @@ All search queries (URLs) are logged to `logs/queries.txt` as single-line entrie
 
 ## License
 
-This is a Flask port of the original PHP Wayback CDX search engine. I have no endorsement from nor affiliation with Archive.org, Wayback Machine or Wayback Machine CDX, etc.
+This is a Flask port of my original PHP Wayback CDX search engine interface from [superscape.org](https://superscape.org). I have no endorsement from nor affiliation with Archive.org, Wayback Machine or Wayback Machine CDX, etc.
