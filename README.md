@@ -6,6 +6,13 @@ This is a Flask port of the original PHP Wayback CDX search engine, which ran in
 
 Feel free to open issues to help each other, but this app is unsupported by me.
 
+## Screenshots
+
+Below are example screenshots of the application interface:
+
+![results.png](screenshots/results.png)
+![footer_stats.png](screenshots/footer_stats.png)
+
 ## Features
 
 - Search domains archived on the Wayback Machine
